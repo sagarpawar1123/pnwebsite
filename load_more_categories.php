@@ -4,9 +4,9 @@ $actionName = $_POST["action"];
 if ($actionName == "showPost") {
 
     $showPostFrom = $_POST["showPostFrom"];
+    $categoryId = $_POST["categoryId"];
 
-    $postUrl = "https://powernewz.com/api/v2/posts?language=75&offset=" . $showPostFrom;
-    // echo $postUrl;
+    $postUrl = "https://api.powernewz.com/api/v2/categories/" . $categoryId . "/posts?language=75&offset=" . $showPostFrom;
     $postArr = file_get_contents($postUrl);
     $postArrValue = json_decode($postArr, true);
     $status = $postArrValue["status"];

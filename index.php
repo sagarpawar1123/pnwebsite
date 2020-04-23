@@ -40,10 +40,10 @@
 				</div>
 				<div class="flex w-full pt-2 content-center justify-between md:w-1/2 md:justify-end">
 					<ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
-						<!-- <li class="mr-3">
-							<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">link</a>
+						<li class="mr-3 rounded-lg shadow-xl">
+							<a class="inline-block text-white no-underline hover:text-white hover:text-white py-2 px-4" href="#">KA</a>
 						</li>
-						<li class="mr-3">
+						<!--	<li class="mr-3">
 							<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">link</a>
 						</li> -->
 					</ul>
@@ -84,6 +84,12 @@
 			<div class="lg:w-2/4 bg-gray-300 center-fixed">
 				<div class="post-data-list">
 					<?php
+
+					$url = "https://powernewz.com/api/v2/posts";
+					$arr = file_get_contents($url);
+					$arrValue = json_decode($arr, true);
+					$arrPost = $arrValue["posts"];
+					$postCount = count($arrPost);
 
 					$postUrl = "https://powernewz.com/api/v2/posts?language=75";
 					$postArr = file_get_contents($postUrl);
@@ -242,13 +248,13 @@
 		<script type="text/javascript">
 			$(document).ready(function(e) {
 				$showPostFrom = 0;
+				$total_records = <?php print_r($postCount); ?>
 
 				$(window).scroll(function() {
 					$postCount = $('.li-post-group:last').index() + 1;
-					console.log($postCount);
 
 					if (($(window).scrollTop() + $(window).height() >= $(document).height())) {
-						console.log("postcount", $postCount);
+						$showPostFrom += $postCount;
 
 						$('.load-post').show();
 						$.ajax({

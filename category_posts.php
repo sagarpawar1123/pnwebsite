@@ -40,10 +40,10 @@
                 </div>
                 <div class="flex w-full pt-2 content-center justify-between md:w-1/2 md:justify-end">
                     <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
-                        <!-- <li class="mr-3">
-                            <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">link</a>
-                        </li>
                         <li class="mr-3">
+                            <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">KA</a>
+                        </li>
+                        <!-- <li class="mr-3">
                             <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">link</a>
                         </li> -->
                     </ul>
@@ -85,7 +85,7 @@
                 <div class="post-data-list">
                     <?php
                     $categoryId = $_GET["id"];
-                    $postUrl = "https://api.powernewz.com/api/v2/categories/" . $categoryId . "/posts";
+                    $postUrl = "https://api.powernewz.com/api/v2/categories/" . $categoryId . "/posts?language=75";
                     $postArr = file_get_contents($postUrl);
                     $postArrValue = json_decode($postArr, true);
                     $status = $postArrValue["status"];
@@ -242,21 +242,23 @@
         <script type="text/javascript">
             $(document).ready(function(e) {
                 $showPostFrom = 0;
+                $total_records = <?php print_r($postCount); ?>
+                $categoryId = <?php print_r($categoryId); ?>
 
                 $(window).scroll(function() {
                     $postCount = $('.li-post-group:last').index() + 1;
-                    console.log($postCount);
 
                     if (($(window).scrollTop() + $(window).height() >= $(document).height())) {
-                        // $showPostFrom += $showPostCount;
+                        $showPostFrom += $postCount;
 
                         $('.load-post').show();
                         $.ajax({
                             type: 'POST',
-                            url: 'load_more.php',
+                            url: 'load_more_categories.php',
                             data: {
                                 'action': 'showPost',
-                                'showPostFrom': $showPostFrom
+                                'showPostFrom': $showPostFrom,
+                                'categoryId': $categoryId
                                 // 'showPostCount': $showPostCount
                             },
                             success: function(data) {
