@@ -85,6 +85,7 @@
                 <div class="post-data-list">
                     <?php
                     $categoryId = $_GET["id"];
+                    // echo $categoryId;
                     $postUrl = "https://api.powernewz.com/api/v2/categories/" . $categoryId . "/posts?language=75";
                     $postArr = file_get_contents($postUrl);
                     $postArrValue = json_decode($postArr, true);
@@ -243,7 +244,9 @@
             $(document).ready(function(e) {
                 $showPostFrom = 0;
                 $total_records = <?php print_r($postCount); ?>
-                $categoryId = <?php print_r($categoryId); ?>
+                $categoryId = <?php print_r($_GET["id"]); ?>
+
+                console.log("category_posts", $categoryId);
 
                 $(window).scroll(function() {
                     $postCount = $('.li-post-group:last').index() + 1;

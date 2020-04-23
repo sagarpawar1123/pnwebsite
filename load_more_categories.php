@@ -6,6 +6,8 @@ if ($actionName == "showPost") {
     $showPostFrom = $_POST["showPostFrom"];
     $categoryId = $_POST["categoryId"];
 
+    // echo "in load_more_categories : " . $categoryId;
+
     $postUrl = "https://api.powernewz.com/api/v2/categories/" . $categoryId . "/posts?language=75&offset=" . $showPostFrom;
     $postArr = file_get_contents($postUrl);
     $postArrValue = json_decode($postArr, true);
