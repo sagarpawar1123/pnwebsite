@@ -8,13 +8,53 @@
 		<link href="css/fontawesome/css/all.css" rel="stylesheet">
 		<script defer src="css/fontawesome/js/all.js"></script>
 		<script src="js/jquery.min.js"></script>
+		<style>
+			.left-fixed {
+				position: fixed;
+				top: 64px;
+				left: 3%;
+			}
+
+			.right-fixed {
+				position: fixed;
+				top: 64px;
+				right: 3%;
+			}
+
+			.center-fixed {
+				position: relative;
+				left: 25%;
+				top: 64px;
+			}
+		</style>
 	</head>
 
-	<body class="container bg-gray-300">
+	<body class="bg-gray-300">
+		<!--Nav-->
+		<nav class="bg-gray-800 p-2 mt-0 fixed w-full z-10 top-0">
+			<div class="container mx-auto flex flex-wrap items-center">
+				<div class="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold">
+					<a class="text-white no-underline hover:text-white hover:no-underline" href="#">
+						<img class="h-6" height="32" alt="Power Newz" src="https://res.cloudinary.com/powernewz/image/upload/q_auto:eco/v1522696194/powernewz_logo.png" />
+					</a>
+				</div>
+				<div class="flex w-full pt-2 content-center justify-between md:w-1/2 md:justify-end">
+					<ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
+						<li class="mr-3">
+							<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">link</a>
+						</li>
+						<li class="mr-3">
+							<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">link</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
 		<!-- Three columns -->
-		<div class="flex mb-4">
+		<div class="container m-auto flex mb-4">
 			<!-- Left SideBar -->
-			<div class="lg:w-1/4">
+			<div class="lg:w-1/4 left-fixed bg-gray-300">
 				<div class="bg-gray-300">
 					<a href="#">
 						<div class="text-gray-700 rounded bg-white px-6 py-2 m-2">Power Newz</div>
@@ -41,7 +81,7 @@
 			</div>
 			<!-- End of Left Sidebar -->
 			<!-- Post List -->
-			<div class="lg:w-2/4 bg-gray-300">
+			<div class="lg:w-2/4 bg-gray-300 center-fixed">
 				<div class="post-data-list">
 					<?php
 
@@ -82,23 +122,13 @@
 							$categoryImage = $value["image"];
 						}
 
-						// foreach ($comments as $key => $value) {
-						// 	$categoryName = $value["name"];
-						// }
-						// foreach ($videos as $key => $value) {
-						// 	$categoryName = $value["name"];
-						// }
-						// foreach ($files as $key => $value) {
-						// 	$categoryName = $value["name"];
-						// }
-
 					?>
 						<div class="li-post-group rounded-lg flex m-2">
 							<div class="w-full overflow-hidden rounded-lg shadow-md bg-white clearfix">
 								<div class="mx-2 my-2">
-									<img src="https://lh3.googleusercontent.com/YTb_Kh5vJMdGQnsRQOH60SF6OC6pYKC4AOq538efK6zfHdY_5KF-q0XDuwi_-tQyDQ=s180-rw" id="" class="float-left" width="50" alt="Power Newz" />
+									<img src="https://lh3.googleusercontent.com/YTb_Kh5vJMdGQnsRQOH60SF6OC6pYKC4AOq538efK6zfHdY_5KF-q0XDuwi_-tQyDQ=s180-rw" id="" class="float-left mx-2" width="50" alt="Power Newz" />
 									<span class="shadow bg-gray-200 rounded-md text-md font-semibold text-orange-600 my-1 float-right" style="padding: 5px 20px"><?php echo $categoryName; ?></span>
-									<h3 class="font-semibold"><?php echo $user["name"]; ?></h3>
+									<h3 class="font-semibold" style="line-height:1.6"><?php echo $user["name"]; ?></h3>
 									<p><?php echo $location["locality"]; ?></p>
 								</div>
 
@@ -183,7 +213,7 @@
 
 			<!-- End of Post List -->
 			<!-- Right SideBar -->
-			<div class="lg:w-1/4 bg-gray-300 h-12">
+			<div class="lg:w-1/4 right-fixed bg-gray-300">
 				<div class="bg-gray-300">
 					<?php
 					$url = "https://api.powernewz.com/api/v2/categories";
@@ -217,8 +247,9 @@
 					$postCount = $('.li-post-group:last').index() + 1;
 					console.log($postCount);
 
-					if (($(window).scrollTop() == $(document).height() - $(window).height())) {
+					if (($(window).scrollTop() + $(window).height() >= $(document).height())) {
 						// $showPostFrom += $showPostCount;
+
 						$('.load-post').show();
 						$.ajax({
 							type: 'POST',
