@@ -2,6 +2,7 @@
     <html>
 
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="css/tailwind.css" rel="stylesheet">
         <!-- <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -54,7 +55,7 @@
         <!-- Three columns -->
         <div class="container m-auto flex mb-4">
             <!-- Left SideBar -->
-            <div class="lg:w-1/4 left-fixed bg-gray-300">
+            <div class="hidden rounded-lg lg:block lg:w-1/4 left-fixed bg-gray-300">
                 <div class="bg-gray-300">
                     <a href="#">
                         <div class="text-gray-700 rounded bg-white px-6 py-2 m-2">Power Newz</div>
@@ -80,6 +81,7 @@
                 </div>
             </div>
             <!-- End of Left Sidebar -->
+
             <!-- Post List -->
             <div class="lg:w-2/4 bg-gray-300 center-fixed">
                 <div class="post-data-list">
@@ -211,10 +213,10 @@
                 <div class="show-more load-post" title="More posts">
                     <i class="fas fa-circle-notch fa-spin"></i> Loading...</div>
             </div>
-
             <!-- End of Post List -->
+
             <!-- Right SideBar -->
-            <div class="lg:w-1/4 right-fixed bg-gray-300">
+            <div class="hidden rounded-lg lg:block lg:w-1/4 right-fixed bg-gray-300">
                 <div class="bg-gray-300">
                     <?php
                     $url = "https://api.powernewz.com/api/v2/categories";
